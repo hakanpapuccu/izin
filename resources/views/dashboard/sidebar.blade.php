@@ -4,23 +4,14 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <li><a class="" href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-home"></i>
-							<span class="nav-text">Dashboard</span>
+							<span class="nav-text">Anasayfa</span>
 						</a>
-                        <ul aria-expanded="false">
-							<li><a href="index.html">Dashboard Light</a></li>
-							<li><a href="index-2.html">Dashboard Dark</a></li>
-							<li><a href="project-page.html">Project</a></li>
-							<li><a href="contacts.html">Contacts</a></li>
-							<li><a href="kanban.html">Kanban</a></li>
-							<li><a href="calendar-page.html">Calendar</a></li>
-							<li><a href="message.html">Messages</a></li>	
-						</ul>
-
+                       
                     </li>
 					
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+              <!--      <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="fas fa-info-circle"></i>
 							<span class="nav-text">Apps</span>
 						</a>
@@ -144,36 +135,11 @@
                             <li><a href="./page-lock-screen.html">Lock Screen</a></li>
                             <li><a href="./empty-page.html">Empty Page</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
-				<div class="side-bar-profile">
-					<div class="d-flex align-items-center justify-content-between mb-3">
-						<div class="side-bar-profile-img">
-							<img src="images/user.jpg" alt="">
-						</div>
-						<div class="profile-info1">
-							<h4 class="fs-18 font-w500">Levi Siregar</h4>
-							<span>leviregar@mail.com</span>
-						</div>
-						<div class="profile-button">
-							<i class="fas fa-caret-down scale5 text-light"></i>
-						</div>
-					</div>	
-					<div class="d-flex justify-content-between mb-2 progress-info">
-						<span class="fs-12"><i class="fas fa-star text-orange me-2"></i>Task Progress</span>
-						<span class="fs-12">20/45</span>
-					</div>
-					<div class="progress default-progress">
-						<div class="progress-bar bg-gradientf progress-animated" style="width: 45%; height:10px;" role="progressbar">
-							<span class="sr-only">45% Complete</span>
-						</div>
-					</div>
-				</div>
 				
-				<div class="copyright">
-					<p><strong>Fillow Saas Admin</strong> © 2021 All Rights Reserved</p>
-					<p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
-				</div>
+				
+				
 			</div>
         </div>
         <!--**********************************
