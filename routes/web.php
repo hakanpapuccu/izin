@@ -17,17 +17,14 @@ use App\Http\Controllers\UserController;
 
 
 
+
+
+
+
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dash', function () {
     return view('dashboard.content');
-});
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -39,7 +36,7 @@ Route::middleware('auth')->group(function () {
 Route::controller(UserController::class)->group(function() {
 
     Route::get('/logout', 'destroy')->name('logout');
-
+    Route::post('/login', 'store')->name('login');
 });
 
 require __DIR__.'/auth.php';
