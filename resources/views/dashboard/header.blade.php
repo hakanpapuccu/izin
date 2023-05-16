@@ -15,7 +15,7 @@
 	
 	<!-- PAGE TITLE HERE -->
 	<title>OIDB Panel</title>
-	
+	<link href="/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="/images/logo.png" />
 	<link href="/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
