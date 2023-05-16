@@ -4,12 +4,19 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
 				<ul class="metismenu" id="menu">
-                    <li><a class="" href="javascript:void()" aria-expanded="false">
+                    <li><a class="" href="{{route('dashboard')}}" aria-expanded="false">
 							<i class="fas fa-home"></i>
 							<span class="nav-text">Anasayfa</span>
 						</a>
                        
                     </li>
+
+                    <li><a class="" href="{{route('vacations')}}" aria-expanded="false">
+                        <i class="fas fa-location-arrow"></i>
+                        <span class="nav-text">İzinler</span>
+                    </a>
+                   
+                </li>
 					
               <!--      <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="fas fa-info-circle"></i>

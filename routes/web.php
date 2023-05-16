@@ -3,25 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
-
-
-
-
-
-
+use App\Http\Controllers\VacationsController;
 
 Route::get('/', function () {
     return view('dashboard.content');
@@ -37,6 +19,12 @@ Route::controller(UserController::class)->group(function() {
 
     Route::get('/logout', 'destroy')->name('logout');
     Route::post('/login', 'store')->name('login');
+});
+
+Route::controller(VacationsController::class)->group(function() {
+
+    Route::get('/vacations', 'index')->name('vacations');
+    
 });
 
 require __DIR__.'/auth.php';

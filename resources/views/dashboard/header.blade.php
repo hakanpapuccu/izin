@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +18,16 @@
 	<link href="/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="/images/logo.png" />
+	 <!-- Daterange picker -->
+	 <link href="/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	 <!-- Clockpicker -->
+	 <link href="/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+
+	  <!-- Pick date -->
+	  <link rel="stylesheet" href="/vendor/pickadate/themes/default.css">
+	  <link rel="stylesheet" href="/vendor/pickadate/themes/default.date.css">
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<link href="/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
 	
