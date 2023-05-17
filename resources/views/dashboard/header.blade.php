@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+	<base href="izin//public/">
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="" />
@@ -15,21 +16,21 @@
 	
 	<!-- PAGE TITLE HERE -->
 	<title>OIDB Panel</title>
-	<link href="/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link href={{asset("vendor/datatables/css/jquery.dataTables.min.css")}} rel="stylesheet">
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="/images/logo.png" />
+	<link rel="shortcut icon" type="image/png" href={{asset("images/logo.png")}} />
 	 <!-- Daterange picker -->
-	 <link href="/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	 <link href={{asset("vendor/bootstrap-daterangepicker/daterangepicker.css")}} rel="stylesheet">
 	 <!-- Clockpicker -->
-	 <link href="/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+	 <link href={{asset("vendor/clockpicker/css/bootstrap-clockpicker.min.css")}} rel="stylesheet">
 
 	  <!-- Pick date -->
-	  <link rel="stylesheet" href="/vendor/pickadate/themes/default.css">
-	  <link rel="stylesheet" href="/vendor/pickadate/themes/default.date.css">
+	  <link rel="stylesheet" href={{asset("vendor/pickadate/themes/default.css")}}>
+	  <link rel="stylesheet" href={{asset("vendor/pickadate/themes/default.date.css")}}>
 	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<link href="/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+	<link href={{asset("vendor/jquery-nice-select/css/nice-select.css")}} rel="stylesheet">
+    <link href={{asset("css/style.css")}} rel="stylesheet">
 	
 </head>
 <body>
@@ -57,7 +58,7 @@
         ***********************************-->
        <div class="nav-header">
             <a href="" class="brand-logo">
-				<img src="images/logo.png" alt="logo" width="75"> 
+				<img src={{asset("images/logo.png")}} alt="logo" width="75"> 
 				<div class="brand-title">
 					<h3 class="">OIDB Panel</h3>
 					<span class="brand-sub-title">Kullanıcı</span>
@@ -468,7 +469,7 @@
 											<li>
 												<div class="timeline-panel">
 													<div class="media me-2">
-														<img alt="image" width="50" src="images/avatar/1.jpg">
+														<img alt="image" width="50" src={{asset("images/avatar/1.jpg")}}>
 													</div>
 													<div class="media-body">
 														<h6 class="mb-1">Dr sultads Send you Photo</h6>
@@ -551,7 +552,7 @@
 							
 							<li class="nav-item dropdown  header-profile">
 								<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-									<img src="images/user.jpg" width="56" alt=""/>
+									<img src={{asset("images/user.jpg")}} width="56" alt=""/>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<a href="./app-profile.html" class="dropdown-item ai-icon">

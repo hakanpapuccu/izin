@@ -18,12 +18,12 @@
 	<title>OIDB - Giriş</title>
 	
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="/images/logo.png" />
-    <link href="/css/style.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href={{asset("images/logo.png")}} />
+    <link href={{asset("css/style.css")}} rel="stylesheet">
 
 </head>
 
-<body class="vh-100" style="background-image: url('/images/login.jpg'); background-repeat:no-repeat; background-size:cover;">
+<body class="vh-100" style="background-image: url({{asset('images/login.jpg')}}); background-repeat:no-repeat; background-size:cover;">
     <div class="authincation h-100" style="opacity:0.9;">
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center">
@@ -33,7 +33,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
 									<div class="text-center mb-3">
-										<a href=""><img src="images/logo.png" alt="" width="100"></a>
+										<a href=""><img src={{asset("images/logo.png")}} alt="" width="100"></a>
 									</div>
                                     <h4 class="text-center mb-4">GİRİŞ YAP</h4>
                                     <form action="{{route('login')}}" method="POST">
@@ -74,9 +74,9 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="/vendor/global/global.min.js"></script>
-    <script src="/js/custom.js"></script>
-    <script src="/js/dlabnav-init.js"></script>
-	<script src="/js/styleSwitcher.js"></script>
+    <script src={{asset("vendor/global/global.min.js")}}></script>
+    <script src={{asset("js/custom.js")}}></script>
+    <script src={{asset("js/dlabnav-init.js")}}></script>
+	<script src={{asset("js/styleSwitcher.js")}}></script>
 </body>
 </html>
