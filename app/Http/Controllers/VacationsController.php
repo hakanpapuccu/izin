@@ -11,7 +11,7 @@ class VacationsController extends Controller
     public function index () {
 
         $vacations=VacationModel::orderBy('vacation_date', 'DESC')->get();
-        return view('dashboard.vacations', compact($vacations));
+        return view('dashboard.vacations', compact('vacations'));
 
     }
 }
