@@ -76,6 +76,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($vacations as $vacation)
                                             <tr>
                                                 <td></td>
                                                 <td>Tiger Nixon</td>
@@ -91,8 +92,9 @@
 													</span>											
                                                 </td>												
                                             </tr>
+                                            @endforeach
 
-                                            <tr>
+                                          <!--  <tr>
                                                 <td></td>
                                                 <td>Tiger Nixon</td>
                                                 <td>Architect</td>
@@ -122,7 +124,7 @@
 														Reddedildi
 													</span>											
                                                 </td>												
-                                            </tr>
+                                            </tr> -->
                                          
                                         </tbody>
                                     </table>
