@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 17 May 2023, 14:41:33
+-- Üretim Zamanı: 18 May 2023, 13:05:25
 -- Sunucu sürümü: 10.4.27-MariaDB
 -- PHP Sürümü: 8.2.0
 
@@ -62,7 +62,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2023_05_16_085721_create_vacation_models_table', 3),
 (11, '2023_05_17_111442_add_vacation_user_id_to_vacation_table', 4),
 (12, '2023_05_17_111523_add_vacation_verifier_id_to_vacation_table', 4),
-(13, '2023_05_17_111658_add_vacation_verifier_id_to_vacations_table', 4);
+(13, '2023_05_17_111658_add_vacation_verifier_id_to_vacations_table', 4),
+(14, '2023_05_18_060523_create_vacations_table', 5);
 
 -- --------------------------------------------------------
 
@@ -122,16 +123,42 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `vacations`
+--
+
+CREATE TABLE `vacations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `vacation_user_id` bigint(20) UNSIGNED NOT NULL,
+  `vacation_date` date NOT NULL,
+  `vacation_start` time NOT NULL,
+  `vacation_end` time NOT NULL,
+  `vacation_why` varchar(255) NOT NULL,
+  `is_verified` varchar(255) NOT NULL DEFAULT '2',
+  `vacation_verifier_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Tablo döküm verisi `vacations`
+--
+
+INSERT INTO `vacations` (`id`, `vacation_user_id`, `vacation_date`, `vacation_start`, `vacation_end`, `vacation_why`, `is_verified`, `vacation_verifier_id`, `created_at`, `updated_at`) VALUES
+(2, 1, '2023-05-12', '08:03:30', '10:03:30', 'DENEME', '2', 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `vacation_models`
 --
 
 CREATE TABLE `vacation_models` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `vacation_date` date NOT NULL,
+  `vacation_date` date NOT NULL DEFAULT current_timestamp(),
   `vacation_start` time NOT NULL,
   `vacation_end` time NOT NULL,
   `vacation_why` varchar(255) NOT NULL,
-  `is_verified` varchar(255) NOT NULL,
+  `is_verified` varchar(255) NOT NULL DEFAULT '2',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `vacation_user_id` varchar(255) NOT NULL,
@@ -143,8 +170,9 @@ CREATE TABLE `vacation_models` (
 --
 
 INSERT INTO `vacation_models` (`id`, `vacation_date`, `vacation_start`, `vacation_end`, `vacation_why`, `is_verified`, `created_at`, `updated_at`, `vacation_user_id`, `vacation_verifier_id`) VALUES
-(1, '2023-05-12', '08:03:30', '10:03:30', 'deneme', '', NULL, NULL, '1', '1'),
-(2, '2023-05-17', '08:03:30', '10:03:30', 'deneme', '', NULL, NULL, '1', '1');
+(1, '2023-05-12', '08:03:30', '10:03:30', 'deneme', '1', NULL, NULL, '1', '1'),
+(2, '2023-05-17', '08:03:30', '10:03:30', 'deneme', '2', NULL, NULL, '1', '1'),
+(3, '2023-05-17', '08:03:30', '10:03:30', 'deneme', '3', NULL, NULL, '1', '1');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -185,6 +213,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Tablo için indeksler `vacations`
+--
+ALTER TABLE `vacations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `vacations_vacation_user_id_foreign` (`vacation_user_id`),
+  ADD KEY `vacations_vacation_verifier_id_foreign` (`vacation_verifier_id`);
+
+--
 -- Tablo için indeksler `vacation_models`
 --
 ALTER TABLE `vacation_models`
@@ -204,7 +240,7 @@ ALTER TABLE `failed_jobs`
 -- Tablo için AUTO_INCREMENT değeri `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `personal_access_tokens`
@@ -219,10 +255,27 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `vacations`
+--
+ALTER TABLE `vacations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `vacation_models`
 --
 ALTER TABLE `vacation_models`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Dökümü yapılmış tablolar için kısıtlamalar
+--
+
+--
+-- Tablo kısıtlamaları `vacations`
+--
+ALTER TABLE `vacations`
+  ADD CONSTRAINT `vacations_vacation_user_id_foreign` FOREIGN KEY (`vacation_user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `vacations_vacation_verifier_id_foreign` FOREIGN KEY (`vacation_verifier_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
