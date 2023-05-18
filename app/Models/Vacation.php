@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VacationModel extends Model
+class Vacation extends Model
 {
     use HasFactory;
-    
     protected $guarded = [];
+    public function getUser() {
+
+        return $this->hasOne('App\Models\User', 'id', 'vacation_user_id');
+
+    }
 }

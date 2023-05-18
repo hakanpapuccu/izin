@@ -14,22 +14,26 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6 col-xl-3 col-xxl-6 mb-3">
-                                        <label class="form-label">İzin Tarihi</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" value="01.01.2023"><span class="input-group-text"><i class="far fa-calendar"></i></span>
+                                    <form action="{{route('vacations.add')}}" method="POST">
+                                        @csrf
+                                    
+                                        <div class="col-md-6 col-xl-3 col-xxl-6 mb-3">
+                                            <label class="form-label">İzin Tarihi</label>
+                                            <div class="input-group">
+                                                <input name="vacation_date" type="date" class="form-control" value="">
+                                            </div>
                                         </div>
-                                    </div>
+
                                     <div class="col-md-6 col-xl-3 col-xxl-6 mb-3">
                                         <label class="form-label">İzin İsteme Sebebi</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" value="">
+                                            <input name="vacation_why" type="text" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-xl-3 col-xxl-6 mb-3">
                                         <label class="form-label">İzin Başlangıç Saati</label>
                                         <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autobtn-close="true">
-                                            <input type="text" class="form-control" value="13:14"> 
+                                            <input name="vacation_start" type="text" class="form-control" value="13:14"> 
 											<span class="input-group-text"><i class="far fa-clock"></i></span>
                                         </div>
                                     </div>
@@ -37,16 +41,17 @@
                                     <div class="col-md-6 col-xl-3 col-xxl-6">
                                         <label class="form-label">İzin Bitiş Saati</label>
                                         <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autobtn-close="true">
-                                            <input type="text" class="form-control" value="13:14"> 
+                                            <input name="vacation_end" type="text" class="form-control" value="13:14"> 
 											<span class="input-group-text"><i class="far fa-clock"></i></span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 col-xl-3 col-xxl-6">
                      
-                                    <button class="btn btn-success ">Kaydet</button>
+                                    <button class="btn btn-success " type="submit">Kaydet</button>
                     
                                     </div>
+                                    </form>
 
                                 </div>
                             </div>
@@ -78,18 +83,31 @@
                                         <tbody>
                                             @foreach($vacations as $vacation)
                                             <tr>
-                                                <td></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Architect</td>
-                                                <td>Male</td>
-                                                <td>M.COM., P.H.D.</td>
-                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                                <td>{{$vacation->id;}}</td>
+                                                <td>{{$vacation->getUser->name;}}</td>
+                                                <td>{{$vacation->vacation_date;}}</td>
+                                                <td>{{$vacation->vacation_start;}}</td>
+                                                <td>{{$vacation->vacation_end;}}</td>
+                                                <td><a href="javascript:void(0);">{{$vacation->vacation_why;}}</a></td>
                                                 
                                                 <td>
+                                                    @if($vacation->is_verified==1)
                                                     <span class="badge light badge-success">
 														<i class="fa fa-check text-success me-1"></i>
 														Onaylandı
-													</span>											
+													</span>	
+                                                    @elseif($vacation->is_verified==2)	
+                                                    <span class="badge light badge-warning">
+														<i class="fa fa-circle text-warning me-1"></i>
+														Onay Bekliyor
+													</span>	
+                                                    @elseif($vacation->is_verified==3)
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-ban text-danger me-1"></i>
+														Reddedildi
+													</span>	
+                                                    @else()
+                                                    @endif
                                                 </td>												
                                             </tr>
                                             @endforeach

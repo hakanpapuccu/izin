@@ -24,7 +24,7 @@ Route::controller(UserController::class)->group(function() {
 Route::controller(VacationsController::class)->group(function() {
 
     Route::get('/vacations', 'index')->name('vacations');
-    
+    Route::post('vacations/add', 'add')->name('vacations.add');
 });
 
 require __DIR__.'/auth.php';
