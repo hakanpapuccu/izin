@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 18 May 2023, 13:05:25
--- Sunucu sürümü: 10.4.27-MariaDB
--- PHP Sürümü: 8.2.0
+-- Üretim Zamanı: 20 May 2023, 22:42:58
+-- Sunucu sürümü: 10.4.28-MariaDB
+-- PHP Sürümü: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -118,7 +118,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', 'DsN9uDwfaL1VkD911sW1uCtu15YVyP4xyKUbzM9c3dIBTahZ0WQM3AtYu8Uh', '2023-05-10 06:03:18', '2023-05-10 06:03:18');
+(1, 'admin', 'admin@admin.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', '', '2023-05-10 06:03:18', '2023-05-10 06:03:18'),
+(2, 'user', 'user@user.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', NULL, '2023-05-20 20:39:03', '2023-05-20 20:39:03');
 
 -- --------------------------------------------------------
 
@@ -134,7 +135,7 @@ CREATE TABLE `vacations` (
   `vacation_end` time NOT NULL,
   `vacation_why` varchar(255) NOT NULL,
   `is_verified` varchar(255) NOT NULL DEFAULT '2',
-  `vacation_verifier_id` bigint(20) UNSIGNED NOT NULL,
+  `vacation_verifier_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -144,7 +145,16 @@ CREATE TABLE `vacations` (
 --
 
 INSERT INTO `vacations` (`id`, `vacation_user_id`, `vacation_date`, `vacation_start`, `vacation_end`, `vacation_why`, `is_verified`, `vacation_verifier_id`, `created_at`, `updated_at`) VALUES
-(2, 1, '2023-05-12', '08:03:30', '10:03:30', 'DENEME', '2', 1, NULL, NULL);
+(2, 1, '2023-05-12', '08:03:30', '10:03:30', 'DENEME', '2', 1, NULL, NULL),
+(3, 1, '2023-05-22', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 16:50:48', '2023-05-20 16:50:48'),
+(4, 1, '2023-05-23', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 16:52:21', '2023-05-20 16:52:21'),
+(5, 1, '2023-05-24', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:02:53', '2023-05-20 17:02:53'),
+(6, 1, '2023-05-24', '14:15:00', '16:25:00', 'asdff', '2', NULL, '2023-05-20 17:14:59', '2023-05-20 17:14:59'),
+(7, 1, '2023-05-22', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:16:11', '2023-05-20 17:16:11'),
+(8, 1, '2023-05-25', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:18:51', '2023-05-20 17:18:51'),
+(9, 1, '2023-05-23', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:20:31', '2023-05-20 17:20:31'),
+(10, 1, '2023-05-26', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:20:52', '2023-05-20 17:20:52'),
+(11, 2, '2023-05-22', '08:15:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:42:06', '2023-05-20 17:42:06');
 
 -- --------------------------------------------------------
 
@@ -252,13 +262,13 @@ ALTER TABLE `personal_access_tokens`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `vacations`
 --
 ALTER TABLE `vacations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `vacation_models`

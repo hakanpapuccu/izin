@@ -19,7 +19,7 @@ return new class extends Migration
             $table->time('vacation_end');
             $table->string('vacation_why');
             $table->string('is_verified');
-            $table->unsignedBigInteger('vacation_verifier_id');
+            $table->unsignedBigInteger('vacation_verifier_id')->nullable();
             $table->timestamps();
 
             $table->foreign('vacation_user_id')->references('id')->on('users');
