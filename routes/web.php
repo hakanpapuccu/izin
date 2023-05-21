@@ -5,9 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VacationsController;
 
+
 Route::get('/', function () {
-    return view('dashboard.content' , [App\Http\Controllers\VacationsController::class , 'show']);
+    return view('dashboard.content' , [VacationsController::class, 'show']);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

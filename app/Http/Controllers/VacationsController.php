@@ -15,12 +15,13 @@ class VacationsController extends Controller
 
         $vacations=Vacation::orderBy('vacation_date', 'desc')->get();
         return view('dashboard.vacations', compact('vacations'));
+        
 
     }
 
     public function show () {
 
-        $vacations=Vacation::orderBy('vacation_date', 'desc')->get();
+        $vacations=Vacation::all();
         return view('dashboard.content', compact('vacations'));
 
     }

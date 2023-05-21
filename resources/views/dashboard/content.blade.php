@@ -43,7 +43,7 @@
                                                 </td>												
                                             </tr>
 
-                                            @endforeach
+                                        @endforeach
 
                                           <!--  <tr>
                                                 <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
