@@ -13,10 +13,11 @@
                                 <h4 class="card-title">İzin Talebi Oluştur</h4>
                             </div>
                             <div class="card-body">
+                            <form action="{{route('vacations.add')}}" method="POST" class="form-inline">
+                            @csrf
                                 <div class="row">
-                                    <form action="{{route('vacations.add')}}" method="POST">
-                                        @csrf
                                     
+                                           
                                         <div class="col-md-6 col-xl-3 col-xxl-6 mb-3">
                                             <label class="form-label">İzin Tarihi</label>
                                             <div class="input-group">
@@ -51,9 +52,11 @@
                                     <button class="btn btn-success " type="submit">Kaydet</button>
                     
                                     </div>
-                                    </form>
+                                    
 
                                 </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 @extends('dashboard.index')
 @section('content')
 <div class="content-body">
+        @if(Auth::user()->is_admin==1) 
             <!-- row -->
 			<div class="container-fluid">
                 <!-- Not verified vacations list -->
@@ -25,7 +26,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($vacations as $vacation)
                                             <tr>
+                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
+                                                <td>Tiger Nixon</td>
+                                                <td>Architect</td>
+                                                <td>Male</td>
+                                                <td>M.COM., P.H.D.</td>
+                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
+                                                
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a href="#" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
+                                                        <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
+                                                    </div>												
+                                                </td>												
+                                            </tr>
+
+                                            @endforeach
+
+                                          <!--  <tr>
                                                 <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
                                                 <td>Tiger Nixon</td>
                                                 <td>Architect</td>
@@ -55,23 +75,7 @@
                                                         <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
                                                     </div>												
                                                 </td>												
-                                            </tr>
-
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Architect</td>
-                                                <td>Male</td>
-                                                <td>M.COM., P.H.D.</td>
-                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                                
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
-                                                    </div>												
-                                                </td>												
-                                            </tr>
+                                            </tr> -->
                                          
                                         </tbody>
                                     </table>
@@ -84,5 +88,7 @@
                 <!-- Not verified vacations list -->
 				
             </div>
+
+        @endif
         </div>
 @endsection

@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vacation;
-use App\Models\User;
+
 
 class VacationsController extends Controller
 {
@@ -18,9 +18,16 @@ class VacationsController extends Controller
 
     }
 
+    public function show () {
+
+        $vacations=Vacation::orderBy('vacation_date', 'desc')->get();
+        return view('dashboard.content', compact('vacations'));
+
+    }
+
     public function add (Request $Request) {
 
-        $User=new User;
+      
         $vacation=new Vacation;
         $vacation->vacation_date=$Request->vacation_date;
         $vacation->vacation_why=$Request->vacation_why;
@@ -31,9 +38,7 @@ class VacationsController extends Controller
         $vacation->save();
         toastr()->success('İzin başarıyla oluşturuldu', 'Başarılı');
         return redirect()->route('vacations');
-
-        
-
+ 
         }
 
 

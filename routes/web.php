@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VacationsController;
 
 Route::get('/', function () {
-    return view('dashboard.content');
+    return view('dashboard.content' , [App\Http\Controllers\VacationsController::class , 'show']);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -22,7 +22,7 @@ Route::controller(UserController::class)->group(function() {
 });
 
 Route::controller(VacationsController::class)->group(function() {
-
+    
     Route::get('/vacations', 'index')->name('vacations');
     Route::post('vacations/add', 'add')->name('vacations.add');
 });
