@@ -14,4 +14,10 @@ class Vacation extends Model
         return $this->hasOne('App\Models\User', 'id', 'vacation_user_id');
 
     }
+
+    public function getVerifier() {
+
+        return $this->hasOne('App\Models\User', 'id', 'vacation_verifier_id');
+
+    }
 }

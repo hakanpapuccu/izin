@@ -4,10 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VacationsController;
-use App\Http\Controllers\HomeController;
 
 
-Route::get('/',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/',  [VacationsController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -26,6 +26,8 @@ Route::controller(VacationsController::class)->group(function() {
     
     Route::get('/vacations', 'index')->name('vacations');
     Route::post('vacations/add', 'add')->name('vacations.add');
+    Route::get('vacations/verify/{id}' , 'verify')->name('vacations.verify');
+    Route::get('vacations/reject/{id}' , 'reject')->name('vacations.reject');
 });
 
 require __DIR__.'/auth.php';

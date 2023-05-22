@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 21 May 2023, 20:24:41
--- Sunucu sürümü: 10.4.28-MariaDB
--- PHP Sürümü: 8.2.4
+-- Üretim Zamanı: 22 May 2023, 11:15:54
+-- Sunucu sürümü: 10.4.27-MariaDB
+-- PHP Sürümü: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -109,6 +109,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
+  `is_admin` varchar(256) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -117,9 +118,9 @@ CREATE TABLE `users` (
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@admin.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', '', '2023-05-10 06:03:18', '2023-05-10 06:03:18'),
-(2, 'user', 'user@user.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', NULL, '2023-05-20 20:39:03', '2023-05-20 20:39:03');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `is_admin`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@admin.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', '', '1', '2023-05-10 06:03:18', '2023-05-10 06:03:18'),
+(2, 'user', 'user@user.com', NULL, '$2y$10$GYqyYXkx5LJ8/vC7UCIqwutjm245dFtPfWPGfyX121dOQmZJt1g7K', NULL, '0', '2023-05-20 20:39:03', '2023-05-20 20:39:03');
 
 -- --------------------------------------------------------
 
@@ -145,16 +146,13 @@ CREATE TABLE `vacations` (
 --
 
 INSERT INTO `vacations` (`id`, `vacation_user_id`, `vacation_date`, `vacation_start`, `vacation_end`, `vacation_why`, `is_verified`, `vacation_verifier_id`, `created_at`, `updated_at`) VALUES
-(2, 1, '2023-05-12', '08:03:30', '10:03:30', 'DENEME', '2', 1, NULL, NULL),
-(3, 1, '2023-05-22', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 16:50:48', '2023-05-20 16:50:48'),
-(4, 1, '2023-05-23', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 16:52:21', '2023-05-20 16:52:21'),
-(5, 1, '2023-05-24', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:02:53', '2023-05-20 17:02:53'),
-(6, 1, '2023-05-24', '14:15:00', '16:25:00', 'asdff', '2', NULL, '2023-05-20 17:14:59', '2023-05-20 17:14:59'),
-(7, 1, '2023-05-22', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:16:11', '2023-05-20 17:16:11'),
-(8, 1, '2023-05-25', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:18:51', '2023-05-20 17:18:51'),
-(9, 1, '2023-05-23', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:20:31', '2023-05-20 17:20:31'),
-(10, 1, '2023-05-26', '13:14:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:20:52', '2023-05-20 17:20:52'),
-(11, 2, '2023-05-22', '08:15:00', '13:14:00', 'asdff', '2', NULL, '2023-05-20 17:42:06', '2023-05-20 17:42:06');
+(2, 1, '2023-05-12', '08:03:30', '10:03:30', 'DENEME', '1', 1, NULL, '2023-05-22 05:19:18'),
+(9, 1, '2023-05-23', '13:14:00', '13:14:00', 'asdff', '1', 1, '2023-05-20 17:20:31', '2023-05-22 05:34:49'),
+(10, 1, '2023-05-26', '13:14:00', '13:14:00', 'asdff', '1', 1, '2023-05-20 17:20:52', '2023-05-22 05:34:53'),
+(11, 2, '2023-05-22', '08:15:00', '13:14:00', 'asdff', '1', 1, '2023-05-20 17:42:06', '2023-05-22 05:34:42'),
+(12, 2, '2023-05-22', '13:14:00', '17:00:00', 'iş', '3', 1, '2023-05-22 05:49:40', '2023-05-22 05:50:36'),
+(13, 2, '2023-05-23', '13:14:00', '10:00:00', 'hastane', '1', 1, '2023-05-22 05:54:19', '2023-05-22 05:56:50'),
+(14, 2, '2023-05-24', '13:14:00', '15:30:00', 'hastane', '3', 1, '2023-05-22 05:59:44', '2023-05-22 06:00:06');
 
 -- --------------------------------------------------------
 
@@ -268,7 +266,7 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `vacations`
 --
 ALTER TABLE `vacations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `vacation_models`

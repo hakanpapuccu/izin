@@ -13,16 +13,16 @@ class VacationsController extends Controller
 {
     public function index () {
 
-        $vacations=Vacation::orderBy('vacation_date', 'desc')->get();
+        $vacations=Vacation::orderBy('vacation_date', 'desc')->where('vacation_user_id', '=', Auth::user()->id)->get();
         return view('dashboard.vacations', compact('vacations'));
         
-
     }
 
     public function show () {
 
-        $vacations=Vacation::all();
-        return view('dashboard.content', compact('vacations'));
+        $vacations=Vacation::where('is_verified', '=' , '2')->get();
+        $lastvacations=Vacation::all();
+        return view('dashboard.content', compact('vacations', 'lastvacations'));
 
     }
 
@@ -40,8 +40,32 @@ class VacationsController extends Controller
         toastr()->success('İzin başarıyla oluşturuldu', 'Başarılı');
         return redirect()->route('vacations');
  
-        }
+    }
 
+    public function verify ($id) {
 
+        
+        $vacation=Vacation::findOrfail($id);
+        $vacation->is_verified="1";
+        $vacation->vacation_verifier_id=Auth::user()->id;
+        $vacation->save();
+        toastr()->success('İzin onaylandı', 'Başarılı');
+        return redirect()->route('dashboard');
 
+    }
+
+    public function reject ($id) {
+
+        
+        $vacation=Vacation::findOrfail($id);
+        $vacation->is_verified="3";
+        $vacation->vacation_verifier_id=Auth::user()->id;
+        $vacation->save();
+        
+        toastr()->success('İzin reddedildi', 'Başarılı');
+        return redirect()->route('dashboard');
+
+    }
+
+    
 }
