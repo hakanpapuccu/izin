@@ -4,11 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VacationsController;
+use App\Http\Controllers\HomeController;
 
 
-Route::get('/', function () {
-    return view('dashboard.content' , [VacationsController::class, 'show']);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
