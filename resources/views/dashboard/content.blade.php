@@ -119,7 +119,14 @@
                                                 <td>{{$lastvacation->vacation_start}}</td>
                                                 <td>{{$lastvacation->vacation_end}}</td>
                                                 <td><strong>{{$lastvacation->vacation_why}}</strong></td>
-                                                <td><strong>{{$lastvacation->getVerifier->name}}</strong></td>
+                                                <td><strong> 
+                                                    @if($lastvacation->getVerifier->name == 3)
+                                                    {{' '}}
+                                                    @else
+                                                    {{$lastvacation->getVerifier->name}}
+                                                    @endif
+                                                
+                                                </strong></td>
                                                 
                                                 <td>
                                                     @if($lastvacation->is_verified==1)

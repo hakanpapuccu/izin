@@ -35,6 +35,7 @@ class VacationsController extends Controller
         $vacation->vacation_start=$Request->vacation_start;
         $vacation->vacation_end=$Request->vacation_end;
         $vacation->vacation_user_id=Auth::user()->id;
+        
 
         $vacation->save();
         toastr()->success('İzin başarıyla oluşturuldu', 'Başarılı');
