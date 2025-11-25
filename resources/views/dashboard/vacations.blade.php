@@ -94,23 +94,7 @@
                                                 <td><a href="javascript:void(0);">{{$vacation->vacation_why;}}</a></td>
                                                 
                                                 <td>
-                                                    @if($vacation->is_verified==1)
-                                                    <span class="badge light badge-success">
-														<i class="fa fa-check text-success me-1"></i>
-														Onaylandı
-													</span>	
-                                                    @elseif($vacation->is_verified==2)	
-                                                    <span class="badge light badge-warning">
-														<i class="fa fa-circle text-warning me-1"></i>
-														Onay Bekliyor
-													</span>	
-                                                    @elseif($vacation->is_verified==3)
-                                                    <span class="badge light badge-danger">
-														<i class="fa fa-ban text-danger me-1"></i>
-														Reddedildi
-													</span>	
-                                                    @else()
-                                                    @endif
+                                                    <x-vacation-status-badge :status="$vacation->is_verified" />
                                                 </td>												
                                             </tr>
                                             @endforeach

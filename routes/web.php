@@ -28,6 +28,11 @@ Route::controller(VacationsController::class)->group(function() {
     Route::post('vacations/add', 'add')->name('vacations.add');
     Route::get('vacations/verify/{id}' , 'verify')->name('vacations.verify');
     Route::get('vacations/reject/{id}' , 'reject')->name('vacations.reject');
+    
+    // Task Routes
+    Route::resource('tasks', App\Http\Controllers\TaskController::class);
 });
+
+Route::get('/notifications/mark-all-read', [App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.markAllRead')->middleware('auth');
 
 require __DIR__.'/auth.php';

@@ -1,200 +1,259 @@
 @extends('dashboard.index')
+
 @section('content')
 <div class="content-body">
-        @if(Auth::user()->is_admin==1) 
-            <!-- row -->
-			<div class="container-fluid">
-                <!-- Not verified vacations list -->
+    <div class="container-fluid">
+        
+        <!-- Row 1: Statistics -->
+        <div class="row">
+            <!-- Vacation Stats -->
+            <div class="col-xl-6 col-xxl-12">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Onay Bekleyen İzinler</h4>
+                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                        <div class="widget-stat card bg-primary">
+                            <div class="card-body  p-4">
+                                <div class="media">
+                                    <span class="me-3">
+                                        <i class="fas fa-plane-departure"></i>
+                                    </span>
+                                    <div class="media-body text-white text-end">
+                                        <p class="mb-1">Toplam İzin</p>
+                                        <h3 class="text-white">{{ $totalVacationsCount }}</h3>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Adı Soyadı</th>
-                                                <th>Tarih</th>
-                                                <th>İzin Başlangıç Saati</th>
-                                                <th>İzin Bitiş Saati</th>
-                                                <th>İzin İsteme Sebebi</th>
-                                                <th>İşlemler</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($vacations as $vacation)
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>{{$vacation->getUser->name}}</td>
-                                                <td>{{$vacation->vacation_date}}</td>
-                                                <td>{{$vacation->vacation_start}}</td>
-                                                <td>{{$vacation->vacation_end}}</td>
-                                                <td><strong>{{$vacation->vacation_why}}</strong></td>
-                                                
-                                                <td>
-                                                    <div class="d-flex">
-                                                       <a href="{{route('vacations.verify', $vacation->id)}}" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
-                                                       <a href="{{route('vacations.reject', $vacation->id)}}" class="btn btn-danger shadow btn-xs ">Reddet</a>
-                                                    </div>												
-                                                </td>												
-                                            </tr>
-
-                                        @endforeach
-
-                                          <!--  <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Architect</td>
-                                                <td>Male</td>
-                                                <td>M.COM., P.H.D.</td>
-                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                                
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
-                                                    </div>												
-                                                </td>												
-                                            </tr>
-
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Architect</td>
-                                                <td>Male</td>
-                                                <td>M.COM., P.H.D.</td>
-                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                                
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
-                                                    </div>												
-                                                </td>												
-                                            </tr> -->
-                                         
-                                        </tbody>
-                                    </table>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                        <div class="widget-stat card bg-warning">
+                            <div class="card-body p-4">
+                                <div class="media">
+                                    <span class="me-3">
+                                        <i class="fas fa-hourglass-half"></i>
+                                    </span>
+                                    <div class="media-body text-white text-end">
+                                        <p class="mb-1">Onay Bekleyen</p>
+                                        <h3 class="text-white">{{ $pendingVacationsCount }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                        <div class="widget-stat card bg-success">
+                            <div class="card-body p-4">
+                                <div class="media">
+                                    <span class="me-3">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                    <div class="media-body text-white text-end">
+                                        <p class="mb-1">Onaylanan</p>
+                                        <h3 class="text-white">{{ $approvedVacationsCount }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                        <div class="widget-stat card bg-danger">
+                            <div class="card-body p-4">
+                                <div class="media">
+                                    <span class="me-3">
+                                        <i class="fas fa-times-circle"></i>
+                                    </span>
+                                    <div class="media-body text-white text-end">
+                                        <p class="mb-1">Reddedilen</p>
+                                        <h3 class="text-white">{{ $rejectedVacationsCount }}</h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Not verified vacations list -->
-
-                <!-- Last vacations -->
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Geçmiş İzinler</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Adı Soyadı</th>
-                                                <th>Tarih</th>
-                                                <th>İzin Başlangıç Saati</th>
-                                                <th>İzin Bitiş Saati</th>
-                                                <th>İzin İsteme Sebebi</th>
-                                                <th>İşlem Yapan</th>
-                                                <th>İşlemler</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($lastvacations as $lastvacation)
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>{{$lastvacation->getUser->name}}</td>
-                                                <td>{{$lastvacation->vacation_date}}</td>
-                                                <td>{{$lastvacation->vacation_start}}</td>
-                                                <td>{{$lastvacation->vacation_end}}</td>
-                                                <td><strong>{{$lastvacation->vacation_why}}</strong></td>
-                                                <td><strong> 
-                                                    @if($lastvacation->getVerifier->name == 3)
-                                                    {{' '}}
-                                                    @else
-                                                    {{$lastvacation->getVerifier->name}}
-                                                    @endif
-                                                
-                                                </strong></td>
-                                                
-                                                <td>
-                                                    @if($lastvacation->is_verified==1)
-                                                    <span class="badge light badge-success">
-														<i class="fa fa-check text-success me-1"></i>
-														Onaylandı
-													</span>	
-                                                    @elseif($lastvacation->is_verified==2)	
-                                                    <span class="badge light badge-warning">
-														<i class="fa fa-circle text-warning me-1"></i>
-														Onay Bekliyor
-													</span>	
-                                                    @elseif($lastvacation->is_verified==3)
-                                                    <span class="badge light badge-danger">
-														<i class="fa fa-ban text-danger me-1"></i>
-														Reddedildi
-													</span>	
-                                                    @else()
-                                                    @endif
-                                                </td>												
-                                            </tr>
-
-                                        @endforeach
-
-                                          <!--  <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Architect</td>
-                                                <td>Male</td>
-                                                <td>M.COM., P.H.D.</td>
-                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                                
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
-                                                    </div>												
-                                                </td>												
-                                            </tr>
-
-                                            <tr>
-                                                <td><img class="rounded-circle" width="35" src="images/profile/small/pic1.jpg" alt=""></td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Architect</td>
-                                                <td>Male</td>
-                                                <td>M.COM., P.H.D.</td>
-                                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                                
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-success shadow btn-xs  me-1">Onayla</i></a>
-                                                        <a href="#" class="btn btn-danger shadow btn-xs ">Reddet</a>
-                                                    </div>												
-                                                </td>												
-                                            </tr> -->
-                                         
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Last vavations -->
-				
             </div>
 
-        @endif
+            <!-- Task Stats -->
+            <div class="col-xl-6 col-xxl-12">
+                <div class="card">
+                    <div class="card-header border-0 pb-0">
+                        <h4 class="fs-20 font-w700 mb-0">Görev Durumu</h4>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex">
+                                <div class="ms-3">
+                                    <h4 class="fs-24 font-w700 ">{{ $totalTasksCount }}</h4>
+                                    <span class="fs-16 font-w400 d-block">Toplam Görev</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="d-flex me-5">
+                                    <div class="mt-2">
+                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="6.5" cy="6.5" r="6.5" fill="#FFCF6D"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="fs-24 font-w700 ">{{ $inProgressTasksCount }}</h4>
+                                        <span class="fs-16 font-w400 d-block">Devam Eden</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="mt-2">
+                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="6.5" cy="6.5" r="6.5" fill="#09BD3C"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h4 class="fs-24 font-w700 ">{{ $completedTasksCount }}</h4>
+                                        <span class="fs-16 font-w400 d-block">Tamamlanan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress default-progress mt-4 mb-4">
+                            @php
+                                $percent = $totalTasksCount > 0 ? ($completedTasksCount / $totalTasksCount) * 100 : 0;
+                            @endphp
+                            <div class="progress-bar bg-gradient1 progress-animated" style="width: {{ $percent }}%; height:10px;" role="progressbar">
+                                <span class="sr-only">{{ number_format($percent, 0) }}% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Row 2: Pending Approvals (Admin Only) -->
+        @if(Auth::user()->is_admin && $pendingVacations->count() > 0)
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h4 class="fs-20 font-w700">Onay Bekleyen İzinler</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Ad Soyad</th>
+                                        <th>Tarih</th>
+                                        <th>Saat Aralığı</th>
+                                        <th>Sebep</th>
+                                        <th>İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($pendingVacations as $vacation)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="profile-k me-3">
+                                                    <span class="bg-warning text-white">{{ substr($vacation->user->name ?? 'U', 0, 1) }}</span>
+                                                </div>
+                                                <span class="w-space-no">{{ $vacation->user->name ?? 'Bilinmiyor' }}</span>
+                                            </div>
+                                        </td>
+                                        <td>{{ $vacation->vacation_date ? $vacation->vacation_date->format('d.m.Y') : '-' }}</td>
+                                        <td>{{ $vacation->vacation_start ? $vacation->vacation_start->format('H:i') : '-' }} - {{ $vacation->vacation_end ? $vacation->vacation_end->format('H:i') : '-' }}</td>
+                                        <td>{{ $vacation->vacation_reason }}</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="{{ route('vacations.verify', $vacation->id) }}" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-check"></i></a>
+                                                <a href="{{ route('vacations.reject', $vacation->id) }}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <!-- Row 3: Recent Lists -->
+        <div class="row">
+            <!-- Recent Vacations -->
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div>
+                            <h4 class="fs-20 font-w700">Son İzin Hareketleri</h4>
+                        </div>
+                        <div>
+                            @if(Auth::user()->is_admin)
+                            <a href="{{ route('vacations') }}" class="btn btn-outline-primary btn-rounded fs-18">Tümünü Gör</a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card-body px-0">
+                        @foreach($vacations as $vacation)
+                        <div class="d-flex justify-content-between recent-emails mb-4 border-bottom pb-3">
+                            <div class="d-flex">
+                                <div class="profile-k">
+                                    <span class="bg-primary">{{ substr($vacation->user->name ?? 'U', 0, 1) }}</span>
+                                </div>
+                                <div class="ms-3">
+                                    <h4 class="fs-18 font-w500">{{ $vacation->user->name ?? 'Bilinmiyor' }}</h4>
+                                    <span class="font-w400 d-block">{{ $vacation->vacation_reason }}</span>
+                                    <div class="final-badge mt-2">
+                                        <x-vacation-status-badge :status="$vacation->is_verified" />
+                                        <span class="badge text-black border ms-2">
+                                            <i class="far fa-calendar me-2"></i>
+                                            {{ $vacation->vacation_date ? $vacation->vacation_date->format('d.m.Y') : '-' }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Tasks -->
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div>
+                            <h4 class="fs-20 font-w700">Son Görevler</h4>
+                        </div>
+                        <div>
+                            @if(Auth::user()->is_admin)
+                            <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-rounded">+ Yeni Görev</a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card-body px-0">
+                        @foreach($tasks as $task)
+                        <div class="msg-bx d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                            <div class="msg d-flex align-items-center w-100">
+                                <div class="image-box active">
+                                    <span class="btn-icon-start text-primary"><i class="fas fa-tasks fa-2x"></i></span>
+                                </div>
+                                <div class="ms-3 w-100">
+                                    <a href="{{ route('tasks.edit', $task->id) }}">
+                                        <h4 class="fs-18 font-w600">{{ $task->title }}</h4>
+                                    </a>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <span class="me-auto badge badge-xs light badge-{{ $task->priority == 'high' ? 'danger' : ($task->priority == 'medium' ? 'warning' : 'success') }}">
+                                            {{ $task->priority == 'high' ? 'Yüksek' : ($task->priority == 'medium' ? 'Orta' : 'Düşük') }}
+                                        </span>
+                                        <span class="me-4 fs-12">{{ $task->deadline ? $task->deadline->diffForHumans() : '' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection

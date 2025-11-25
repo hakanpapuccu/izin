@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('vacation_start');
             $table->time('vacation_end');
             $table->string('vacation_why');
-            $table->string('is_verified');
+            $table->tinyInteger('is_verified')->default(2)->comment('1: Approved, 2: Pending, 3: Rejected');
             $table->unsignedBigInteger('vacation_verifier_id')->nullable();
             $table->timestamps();
 
