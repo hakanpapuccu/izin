@@ -48,4 +48,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
     ];
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class);
+    }
 }

@@ -23,6 +23,12 @@
                         <span class="nav-text">Görevler</span>
                     </a>
                 </li>
+
+                <li><a class="" href="{{route('announcements.index')}}" aria-expanded="false">
+                        <i class="fas fa-bullhorn"></i>
+                        <span class="nav-text">Duyurular</span>
+                    </a>
+                </li>
 					
               <!--      <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="fas fa-info-circle"></i>
