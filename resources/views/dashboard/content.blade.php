@@ -7,9 +7,9 @@
         <!-- Row 1: Statistics -->
         <div class="row">
             <!-- Vacation Stats -->
-            <div class="col-xl-6 col-xxl-12">
+            <div class="col-xl-12">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                    <div class="col-xl-3 col-lg-3 col-sm-6">
                         <div class="widget-stat card bg-primary">
                             <div class="card-body  p-4">
                                 <div class="media">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                    <div class="col-xl-3 col-lg-3 col-sm-6">
                         <div class="widget-stat card bg-warning">
                             <div class="card-body p-4">
                                 <div class="media">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                    <div class="col-xl-3 col-lg-3 col-sm-6">
                         <div class="widget-stat card bg-success">
                             <div class="card-body p-4">
                                 <div class="media">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-sm-6">
+                    <div class="col-xl-3 col-lg-3 col-sm-6">
                         <div class="widget-stat card bg-danger">
                             <div class="card-body p-4">
                                 <div class="media">
@@ -73,7 +73,7 @@
             </div>
 
             <!-- Task Stats -->
-            <div class="col-xl-6 col-xxl-12">
+            <div class="col-xl-12 col-xxl-12">
                 <div class="card">
                     <div class="card-header border-0 pb-0">
                         <h4 class="fs-20 font-w700 mb-0">Görev Durumu</h4>
