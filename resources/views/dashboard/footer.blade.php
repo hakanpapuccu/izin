@@ -108,6 +108,8 @@
   		toastr.warning("{{ session('warning') }}");
   @endif
 </script>
+
+@stack('scripts')
 	
    
 </body>

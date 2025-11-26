@@ -24,6 +24,13 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('announcements', AnnouncementController::class);
     Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
+    
+    // Chat Routes
+    Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/messages/{user}', [App\Http\Controllers\ChatController::class, 'getMessages'])->name('chat.messages');
+    Route::get('/chat/general', [App\Http\Controllers\ChatController::class, 'getGeneralMessages'])->name('chat.general');
+    Route::post('/chat/send', [App\Http\Controllers\ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::get('/chat/conversations', [App\Http\Controllers\ChatController::class, 'getConversations'])->name('chat.conversations');
 });
 
 Route::controller(UserController::class)->group(function() {

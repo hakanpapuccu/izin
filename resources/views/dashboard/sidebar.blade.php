@@ -30,6 +30,12 @@
                     </a>
                 </li>
 
+                <li><a class="" href="{{route('chat.index')}}" aria-expanded="false">
+                        <i class="fas fa-comments"></i>
+                        <span class="nav-text">Mesajlar</span>
+                    </a>
+                </li>
+
                 @if(Auth::user()->is_admin)
                 <li><a class="" href="{{route('admin.users.index')}}" aria-expanded="false">
                         <i class="fas fa-users"></i>
