@@ -29,6 +29,14 @@
                         <span class="nav-text">Duyurular</span>
                     </a>
                 </li>
+
+                @if(Auth::user()->is_admin)
+                <li><a class="" href="{{route('admin.users.index')}}" aria-expanded="false">
+                        <i class="fas fa-users"></i>
+                        <span class="nav-text">Kullanıcı Yönetimi</span>
+                    </a>
+                </li>
+                @endif
 					
               <!--      <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="fas fa-info-circle"></i>

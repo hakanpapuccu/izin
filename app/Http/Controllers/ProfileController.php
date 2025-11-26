@@ -14,10 +14,19 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, $userId = null): View
     {
+        // If userId is provided and user is admin, load that user
+        // Otherwise, load the authenticated user
+        if ($userId && $request->user()->is_admin) {
+            $user = \App\Models\User::findOrFail($userId);
+        } else {
+            $user = $request->user();
+        }
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'isEditingOtherUser' => $userId !== null && $request->user()->id !== $user->id,
         ]);
     }
 
@@ -27,11 +36,26 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $user = $request->user();
+        
+        // Check if we're editing another user (admin only)
+        $userId = $request->input('user_id');
+        if ($userId && $request->user()->is_admin) {
+            $user = \App\Models\User::findOrFail($userId);
+        } else {
+            $user = $request->user();
+        }
 
         // Note: Image upload is now handled by uploadImage method, 
         // but we keep this logic here if we want to support it in the main form too,
         // or we can remove it. For now, I'll leave it but the main form won't send these fields.
+        
+        // Handle is_admin field (only if admin is editing another user)
+        if ($request->user()->is_admin && $userId) {
+            $user->is_admin = $request->has('is_admin');
+        }
+
+        // Remove is_admin from data before filling to avoid mass assignment issues
+        unset($data['is_admin'], $data['user_id']);
         
         $user->fill($data);
 
@@ -41,7 +65,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect()->route('profile.edit', $userId ?: null)->with('status', 'profile-updated');
     }
 
     public function uploadImage(Request $request)
@@ -51,7 +75,13 @@ class ProfileController extends Controller
             'banner_image' => ['nullable', 'image', 'max:2048'],
         ]);
 
-        $user = $request->user();
+        // Check if we're editing another user (admin only)
+        $userId = $request->input('user_id');
+        if ($userId && $request->user()->is_admin) {
+            $user = \App\Models\User::findOrFail($userId);
+        } else {
+            $user = $request->user();
+        }
 
         if ($request->hasFile('profile_image')) {
             if ($user->profile_image) {

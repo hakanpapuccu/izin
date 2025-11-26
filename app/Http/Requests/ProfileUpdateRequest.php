@@ -15,15 +15,20 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Get the user being edited (for admin editing other users)
+        $userId = $this->input('user_id') ?: $this->user()->id;
+
         return [
             'name' => ['string', 'max:255'],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($userId)],
             'address' => ['nullable', 'string', 'max:255'],
             'city' => ['nullable', 'string', 'max:255'],
             'state' => ['nullable', 'string', 'max:255'],
             'zip' => ['nullable', 'string', 'max:255'],
             'profile_image' => ['nullable', 'image', 'max:2048'],
             'banner_image' => ['nullable', 'image', 'max:2048'],
+            'is_admin' => ['nullable', 'boolean'],
+            'user_id' => ['nullable', 'integer', 'exists:users,id'],
         ];
     }
 }

@@ -91,6 +91,12 @@
                                 <form method="post" action="{{ route('profile.update') }}">
                                     @csrf
                                     @method('patch')
+                                    @if(isset($isEditingOtherUser) && $isEditingOtherUser)
+                                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                        <div class="alert alert-info">
+                                            <i class="fa fa-info-circle me-2"></i>Şu anda <strong>{{ $user->name }}</strong> kullanıcısını düzenliyorsunuz.
+                                        </div>
+                                    @endif
                                     <div class="row">
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Ad Soyad</label>
@@ -141,7 +147,21 @@
                                     </div>
                                     <!-- End Address Fields -->
 
+                                    @if(Auth::user()->is_admin && isset($isEditingOtherUser) && $isEditingOtherUser)
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="is_admin" id="is_admin_checkbox" value="1" {{ $user->is_admin ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="is_admin_checkbox">
+                                                    <strong>Admin Yetkisi</strong>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <button class="btn btn-primary" type="submit">Profili Kaydet</button>
+                                    @if(isset($isEditingOtherUser) && $isEditingOtherUser)
+                                        <a href="{{ route('admin.users.index') }}" class="btn btn-light">Kullanıcı Listesine Dön</a>
+                                    @endif
                                 </form>
 
                                 <h4 class="text-primary mt-4">Şifre Güncelle</h4>
@@ -199,6 +219,9 @@
             </div>
             <form action="{{ route('profile.upload-image') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @if(isset($isEditingOtherUser) && $isEditingOtherUser)
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                @endif
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="profileImageInput" class="form-label">Yeni Profil Resmi Seç</label>
@@ -224,6 +247,9 @@
             </div>
             <form action="{{ route('profile.upload-image') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @if(isset($isEditingOtherUser) && $isEditingOtherUser)
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                @endif
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="bannerImageInput" class="form-label">Yeni Kapak Resmi Seç</label>

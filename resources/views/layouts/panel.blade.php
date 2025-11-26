@@ -143,6 +143,17 @@
 						</ul>
 
                     </li>
+                    
+                    @if(Auth::user()->is_admin)
+                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                            <i class="fas fa-users"></i>
+                            <span class="nav-text">Admin</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{ route('admin.users.index') }}">Users</a></li>
+                        </ul>
+                    </li>
+                    @endif
 					
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 						<i class="fas fa-info-circle"></i>
