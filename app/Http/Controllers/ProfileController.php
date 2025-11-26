@@ -26,15 +26,52 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $data = $request->validated();
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Note: Image upload is now handled by uploadImage method, 
+        // but we keep this logic here if we want to support it in the main form too,
+        // or we can remove it. For now, I'll leave it but the main form won't send these fields.
+        
+        $user->fill($data);
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'profile_image' => ['nullable', 'image', 'max:2048'],
+            'banner_image' => ['nullable', 'image', 'max:2048'],
+        ]);
+
+        $user = $request->user();
+
+        if ($request->hasFile('profile_image')) {
+            if ($user->profile_image) {
+                // Storage::disk('public')->delete($user->profile_image);
+            }
+            $path = $request->file('profile_image')->store('profile_images', 'public');
+            $user->profile_image = $path;
+        }
+
+        if ($request->hasFile('banner_image')) {
+            if ($user->banner_image) {
+                // Storage::disk('public')->delete($user->banner_image);
+            }
+            $path = $request->file('banner_image')->store('banner_images', 'public');
+            $user->banner_image = $path;
+        }
+
+        $user->save();
+
+        return back()->with('status', 'profile-updated');
     }
 
     /**

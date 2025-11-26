@@ -18,6 +18,12 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'address' => ['nullable', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'state' => ['nullable', 'string', 'max:255'],
+            'zip' => ['nullable', 'string', 'max:255'],
+            'profile_image' => ['nullable', 'image', 'max:2048'],
+            'banner_image' => ['nullable', 'image', 'max:2048'],
         ];
     }
 }
