@@ -36,6 +36,12 @@
                     </a>
                 </li>
 
+                <li><a class="" href="{{route('files.index')}}" aria-expanded="false">
+                        <i class="fas fa-folder"></i>
+                        <span class="nav-text">Dosya Paylaşımı</span>
+                    </a>
+                </li>
+
                 @if(Auth::user()->is_admin)
                 <li><a class="" href="{{route('admin.users.index')}}" aria-expanded="false">
                         <i class="fas fa-users"></i>

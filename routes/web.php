@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VacationsController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\FileShareController;
 
 
 Route::get('/',  [VacationsController::class, 'show'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -31,6 +32,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/chat/general', [App\Http\Controllers\ChatController::class, 'getGeneralMessages'])->name('chat.general');
     Route::post('/chat/send', [App\Http\Controllers\ChatController::class, 'sendMessage'])->name('chat.send');
     Route::get('/chat/conversations', [App\Http\Controllers\ChatController::class, 'getConversations'])->name('chat.conversations');
+
+    // File Share Routes
+    Route::get('/files', [FileShareController::class, 'index'])->name('files.index');
+    Route::get('/files/create', [FileShareController::class, 'create'])->name('files.create');
+    Route::post('/files', [FileShareController::class, 'store'])->name('files.store');
+    Route::get('/files/{id}/download', [FileShareController::class, 'download'])->name('files.download');
 });
 
 Route::controller(UserController::class)->group(function() {
