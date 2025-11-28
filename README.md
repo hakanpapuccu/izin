@@ -1,66 +1,103 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# OIDB Panel - İzin ve Görev Yönetim Sistemi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bu proje, personel izinleri, görev takibi, duyurular, mesajlaşma ve dosya paylaşımı gibi süreçleri yönetmek için geliştirilmiş kapsamlı bir web uygulamasıdır. Laravel framework'ü kullanılarak geliştirilmiştir.
 
-## About Laravel
+## Özellikler
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+*   **İzin Yönetimi:** Personel izin talepleri oluşturabilir, yöneticiler onaylayabilir veya reddedebilir.
+*   **Görev Takibi:** Görev atama, durum güncelleme (Beklemede, Devam Ediyor, Tamamlandı) ve takip.
+*   **İş Takvimi:** Etkinliklerin ve görevlerin takvim üzerinde görüntülenmesi.
+*   **Duyurular:** Yöneticiler tarafından tüm personele duyuru yayınlama.
+*   **Mesajlaşma:** Kullanıcılar arası birebir mesajlaşma ve genel sohbet odası.
+*   **Dosya Paylaşımı:** Dosya yükleme ve indirme.
+*   **Anketler:** Yönetici tarafından oluşturulan anketlere personelin katılımı.
+*   **Departman Yönetimi:** Departman oluşturma ve düzenleme.
+*   **Kullanıcı Yönetimi:** Kullanıcı ekleme, düzenleme ve rol (Yönetici/Personel) atama.
+*   **Platform Ayarları:** Site başlığı, logo ve favicon yönetimi.
+*   **Dinamik Arayüz:** Kullanıcı dostu ve responsive tasarım (Fillow teması).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Gereksinimler
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+*   PHP 8.1 veya üzeri
+*   Composer
+*   Node.js ve NPM
+*   MySQL
 
-## Learning Laravel
+## Kurulum
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1.  **Projeyi İndirin:**
+    ```bash
+    git clone [repo-url]
+    cd izin
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2.  **PHP Bağımlılıklarını Yükleyin:**
+    ```bash
+    composer install
+    ```
 
-## Laravel Sponsors
+3.  **Frontend Bağımlılıklarını Yükleyin ve Derleyin:**
+    ```bash
+    npm install
+    npm run build
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+4.  **Çevre Değişkenlerini Ayarlayın:**
+    `.env.example` dosyasını kopyalayarak `.env` dosyasını oluşturun ve veritabanı ayarlarınızı yapın.
+    ```bash
+    cp .env.example .env
+    ```
+    `.env` dosyasını açın ve veritabanı bilgilerinizi girin:
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=izin_db
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-### Premium Partners
+5.  **Uygulama Anahtarını Oluşturun:**
+    ```bash
+    php artisan key:generate
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+6.  **Veritabanı Tablolarını Oluşturun:**
+    ```bash
+    php artisan migrate
+    ```
 
-## Contributing
+7.  **Dosya Bağlantısını Oluşturun:**
+    Resimlerin ve dosyaların düzgün görüntülenmesi için storage bağlantısını oluşturun.
+    ```bash
+    php artisan storage:link
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+8.  **Uygulamayı Başlatın:**
+    ```bash
+    php artisan serve
+    ```
+    Uygulama `http://localhost:8000` adresinde çalışacaktır.
 
-## Code of Conduct
+## Kullanım
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+*   **Kayıt Ol:** Ana sayfadan "Kayıt Ol" butonuna tıklayarak yeni bir kullanıcı oluşturabilirsiniz.
+*   **Yönetici Hesabı:** İlk kayıt olan kullanıcı varsayılan olarak "Personel" rolündedir. Bir kullanıcıyı yönetici yapmak için veritabanında `users` tablosundaki `is_admin` değerini `1` yapmanız gerekir.
+    *   Bunu `php artisan tinker` kullanarak yapabilirsiniz:
+        ```bash
+        php artisan tinker
+        $user = App\Models\User::first();
+        $user->is_admin = true;
+        $user->save();
+        exit
+        ```
 
-## Security Vulnerabilities
+## Katkıda Bulunma
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1.  Bu depoyu forklayın.
+2.  Yeni bir özellik dalı oluşturun (`git checkout -b yeni-ozellik`).
+3.  Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik eklendi'`).
+4.  Dalınızı pushlayın (`git push origin yeni-ozellik`).
+5.  Bir Pull Request oluşturun.
