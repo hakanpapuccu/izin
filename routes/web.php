@@ -16,6 +16,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('users', AdminUserController::class);
     Route::resource('departments', App\Http\Controllers\DepartmentController::class);
     Route::resource('polls', App\Http\Controllers\PollController::class);
+    
+    // Platform Settings
+    Route::get('settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');
+    Route::post('settings', [App\Http\Controllers\SettingsController::class, 'update'])->name('settings.update');
 });
 
 

@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Setting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class SettingsController extends Controller
+{
+    public function index()
+    {
+        return view('admin.settings.index');
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'site_title' => 'nullable|string|max:255',
+            'site_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'site_favicon' => 'nullable|image|mimes:ico,png|max:1024',
+        ]);
+
+        if ($request->has('site_title')) {
+            Setting::set('site_title', $request->site_title);
+        }
+
+        if ($request->hasFile('site_logo')) {
+            $path = $request->file('site_logo')->store('public/settings');
+            Setting::set('site_logo', str_replace('public/', '', $path));
+        }
+
+        if ($request->hasFile('site_favicon')) {
+            $path = $request->file('site_favicon')->store('public/settings');
+            Setting::set('site_favicon', str_replace('public/', '', $path));
+        }
+
+        return redirect()->back()->with('success', 'Ayarlar güncellendi.');
+    }
+}

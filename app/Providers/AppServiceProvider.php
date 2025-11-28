@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('*', function ($view) {
+            $view->with('site_title', \App\Models\Setting::get('site_title', 'OIDB Panel'));
+            $view->with('site_logo', \App\Models\Setting::get('site_logo'));
+            $view->with('site_favicon', \App\Models\Setting::get('site_favicon'));
+        });
     }
 }

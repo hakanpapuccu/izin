@@ -70,6 +70,11 @@
                         <span class="nav-text">Anket Yönetimi</span>
                     </a>
                 </li>
+                <li><a class="" href="{{route('admin.settings.index')}}" aria-expanded="false">
+                        <i class="fas fa-cogs"></i>
+                        <span class="nav-text">Platform Ayarları</span>
+                    </a>
+                </li>
                 @endif
 					
               <!--      <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">

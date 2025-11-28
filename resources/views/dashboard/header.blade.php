@@ -16,10 +16,10 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>OIDB Panel</title>
+	<title>{{ $site_title }}</title>
 	<link href={{asset("vendor/datatables/css/jquery.dataTables.min.css")}} rel="stylesheet">
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href={{asset("images/logo.png")}} />
+	<link rel="shortcut icon" type="image/png" href="{{ $site_favicon ? asset('storage/' . $site_favicon) : asset('images/logo.png') }}" />
 	 <!-- Daterange picker -->
 	 <link href={{asset("vendor/bootstrap-daterangepicker/daterangepicker.css")}} rel="stylesheet">
 	 <!-- Clockpicker -->
@@ -61,9 +61,9 @@
         ***********************************-->
        <div class="nav-header">
             <a href="" class="brand-logo">
-				<img src={{asset("images/logo.png")}} alt="logo" width="75"> 
+				<img src="{{ $site_logo ? asset('storage/' . $site_logo) : asset('images/logo.png') }}" alt="logo" width="75"> 
 				<div class="brand-title">
-					<h3 class="">OIDB Panel</h3>
+					<h3 class="">{{ $site_title }}</h3>
 					<span class="brand-sub-title">Kullanıcı</span>
 				</div>
             </a>

@@ -1,0 +1,61 @@
+@extends('dashboard.index')
+
+@section('content')
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Admin</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Platform Ayarları</a></li>
+            </ol>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Genel Ayarlar</h4>
+                    </div>
+                    <div class="card-body">
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label class="form-label">Site Başlığı</label>
+                                <input type="text" class="form-control" name="site_title" value="{{ \App\Models\Setting::get('site_title', 'OIDB Panel') }}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Site Logosu</label>
+                                <input type="file" class="form-control" name="site_logo">
+                                @if(\App\Models\Setting::get('site_logo'))
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . \App\Models\Setting::get('site_logo')) }}" alt="Logo" height="50">
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Favicon</label>
+                                <input type="file" class="form-control" name="site_favicon">
+                                @if(\App\Models\Setting::get('site_favicon'))
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . \App\Models\Setting::get('site_favicon')) }}" alt="Favicon" height="32">
+                                    </div>
+                                @endif
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
