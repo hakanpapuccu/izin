@@ -1,4 +1,4 @@
-# OIDB Panel - İzin ve Görev Yönetim Sistemi
+# SYS Panel - Süreç Yönetim Sistemi
 
 Bu proje, personel izinleri, görev takibi, duyurular, mesajlaşma ve dosya paylaşımı gibi süreçleri yönetmek için geliştirilmiş kapsamlı bir web uygulamasıdır. Laravel framework'ü kullanılarak geliştirilmiştir.
 
@@ -83,16 +83,16 @@ Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyi
 
 ## Kullanım
 
-*   **Kayıt Ol:** Ana sayfadan "Kayıt Ol" butonuna tıklayarak yeni bir kullanıcı oluşturabilirsiniz.
-*   **Yönetici Hesabı:** İlk kayıt olan kullanıcı varsayılan olarak "Personel" rolündedir. Bir kullanıcıyı yönetici yapmak için veritabanında `users` tablosundaki `is_admin` değerini `1` yapmanız gerekir.
-    *   Bunu `php artisan tinker` kullanarak yapabilirsiniz:
-        ```bash
-        php artisan tinker
-        $user = App\Models\User::first();
-        $user->is_admin = true;
-        $user->save();
-        exit
-        ```
+*   **Giriş Yap:** Yöneticiniz tarafından size verilen bilgilerle sisteme giriş yapabilirsiniz.
+*   **Kullanıcı Ekleme:** Sisteme dışarıdan kayıt olunamaz. Yeni kullanıcılar sadece **Yönetici** yetkisine sahip kullanıcılar tarafından "Kullanıcı Yönetimi" sayfasından eklenebilir.
+*   **Yönetici Hesabı:** İlk kurulumda veritabanında manuel olarak bir kullanıcı oluşturulması veya seeder kullanılması gerekebilir. Mevcut bir kullanıcıyı yönetici yapmak için:
+    ```bash
+    php artisan tinker
+    $user = App\Models\User::first();
+    $user->is_admin = true;
+    $user->save();
+    exit
+    ```
 
 ## Katkıda Bulunma
 
