@@ -29,7 +29,7 @@
 	  <link rel="stylesheet" href={{asset("vendor/pickadate/themes/default.date.css")}}>
 	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
-	  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	  <link href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
 
 	<link href={{asset("vendor/jquery-nice-select/css/nice-select.css")}} rel="stylesheet">
     <link href={{asset("css/style.css")}} rel="stylesheet">

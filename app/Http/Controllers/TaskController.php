@@ -51,7 +51,7 @@ class TaskController extends Controller
         // Notify Assigned User
         $task->assignedTo->notify(new \App\Notifications\TaskAssigned($task));
 
-        toastr()->success('Görev başarıyla oluşturuldu', 'Başarılı');
+        session()->flash('success', 'Görev başarıyla oluşturuldu');
         return redirect()->route('tasks.index');
     }
 
@@ -90,7 +90,7 @@ class TaskController extends Controller
             $task->update($validated);
         }
 
-        toastr()->success('Görev güncellendi', 'Başarılı');
+        session()->flash('success', 'Görev güncellendi');
         return redirect()->route('tasks.index');
     }
 
@@ -98,7 +98,7 @@ class TaskController extends Controller
     {
         $this->authorize('delete', $task);
         $task->delete();
-        toastr()->success('Görev silindi', 'Başarılı');
+        session()->flash('success', 'Görev silindi');
         return redirect()->route('tasks.index');
     }
 }

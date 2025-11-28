@@ -228,8 +228,15 @@ function displayDirectMessages(messages, silent) {
     });
     
     // Show notification for new messages
-    if (hasNewIncoming && typeof toastr !== 'undefined') {
-        toastr.info('Yeni mesaj geldi!');
+    if (hasNewIncoming && typeof Swal !== 'undefined') {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'info',
+            title: 'Yeni mesaj geldi!',
+            showConfirmButton: false,
+            timer: 3000
+        });
     }
 }
 
@@ -319,8 +326,15 @@ function displayGeneralMessages(messages, silent) {
     });
     
     // Show notification for new general messages
-    if (hasNewIncoming && typeof toastr !== 'undefined') {
-        toastr.success('Genel sohbete yeni mesaj geldi!');
+    if (hasNewIncoming && typeof Swal !== 'undefined') {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Genel sohbete yeni mesaj geldi!',
+            showConfirmButton: false,
+            timer: 3000
+        });
     }
 }
 

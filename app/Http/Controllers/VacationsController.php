@@ -104,7 +104,7 @@ class VacationsController extends Controller
         $admins = User::where('is_admin', true)->get();
         Notification::send($admins, new VacationCreated($vacation));
 
-        toastr()->success('İzin başarıyla oluşturuldu', 'Başarılı');
+        session()->flash('success', 'İzin başarıyla oluşturuldu');
         return redirect()->route('vacations');
  
     }
@@ -121,7 +121,7 @@ class VacationsController extends Controller
         // Notify User
         $vacation->user->notify(new VacationStatusUpdated($vacation, 'approved'));
 
-        toastr()->success('İzin onaylandı', 'Başarılı');
+        session()->flash('success', 'İzin onaylandı');
         return redirect()->route('dashboard');
 
     }
@@ -138,7 +138,7 @@ class VacationsController extends Controller
         // Notify User
         $vacation->user->notify(new VacationStatusUpdated($vacation, 'rejected'));
 
-        toastr()->success('İzin reddedildi', 'Başarılı');
+        session()->flash('success', 'İzin reddedildi');
         return redirect()->route('dashboard');
 
     }

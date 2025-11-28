@@ -69,45 +69,52 @@
 	<script src={{asset("vendor/jquery-nice-select/js/jquery.nice-select.min.js")}}></script>
     <script src={{asset("js/custom.js")}}></script>
 	<script src={{asset("js/dlabnav-init.js")}}></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script>
-  @if(Session::has('message'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.success("{{ session('message') }}");
-  @endif
+        @if(Session::has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Başarılı',
+                text: "{{ session('success') }}",
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
 
-  @if(Session::has('error'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.error("{{ session('error') }}");
-  @endif
+        @if(Session::has('message'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Başarılı',
+                text: "{{ session('message') }}",
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
 
-  @if(Session::has('info'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.info("{{ session('info') }}");
-  @endif
+        @if(Session::has('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata',
+                text: "{{ session('error') }}",
+            });
+        @endif
 
-  @if(Session::has('warning'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.warning("{{ session('warning') }}");
-  @endif
-</script>
+        @if(Session::has('info'))
+            Swal.fire({
+                icon: 'info',
+                title: 'Bilgi',
+                text: "{{ session('info') }}",
+            });
+        @endif
+
+        @if(Session::has('warning'))
+            Swal.fire({
+                icon: 'warning',
+                title: 'Uyarı',
+                text: "{{ session('warning') }}",
+            });
+        @endif
+    </script>
 
 @stack('scripts')
 	
