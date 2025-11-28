@@ -1,4 +1,6 @@
 @extends('dashboard.index')
+@section('title', 'İzinlerim')
+
 @section('content')
 <div class="content-body">
             <!-- row -->

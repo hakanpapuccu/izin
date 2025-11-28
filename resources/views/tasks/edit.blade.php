@@ -1,5 +1,7 @@
 @extends('dashboard.index')
 
+@section('title', 'Görev Düzenle')
+
 @section('content')
 <div class="content-body">
     <div class="container-fluid">
