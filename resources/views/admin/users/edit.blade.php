@@ -39,6 +39,19 @@
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
+                                    <label class="form-label">Departman</label>
+                                    <select class="form-control @error('department_id') is-invalid @enderror" name="department_id">
+                                        <option value="">Seçiniz...</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}" {{ old('department_id', $user->department_id) == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('department_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-lg-6 mb-3">
                                     <label class="form-label">Şifre (Boş bırakılırsa değişmez)</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password">
                                     @error('password')

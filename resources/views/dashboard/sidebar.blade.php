@@ -48,6 +48,11 @@
                         <span class="nav-text">Kullanıcı Yönetimi</span>
                     </a>
                 </li>
+                <li><a class="" href="{{route('admin.departments.index')}}" aria-expanded="false">
+                        <i class="fas fa-building"></i>
+                        <span class="nav-text">Departmanlar</span>
+                    </a>
+                </li>
                 @endif
 					
               <!--      <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">

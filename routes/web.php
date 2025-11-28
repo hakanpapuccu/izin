@@ -14,6 +14,7 @@ Route::get('/',  [VacationsController::class, 'show'])->middleware(['auth', 'ver
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', AdminUserController::class);
+    Route::resource('departments', App\Http\Controllers\DepartmentController::class);
 });
 
 

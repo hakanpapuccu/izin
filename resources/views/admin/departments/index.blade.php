@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Kullanıcı Yönetimi</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Departman Yönetimi</a></li>
             </ol>
         </div>
         
@@ -13,8 +13,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Kullanıcılar</h4>
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">Kullanıcı Ekle</a>
+                        <h4 class="card-title">Departmanlar</h4>
+                        <a href="{{ route('admin.departments.create') }}" class="btn btn-primary">Departman Ekle</a>
                     </div>
                     <div class="card-body">
                         @if (session('success'))
@@ -37,32 +37,24 @@
                             <table class="table table-responsive-md">
                                 <thead>
                                     <tr>
-                                        <th><strong>AD SOYAD</strong></th>
-                                        <th><strong>E-POSTA</strong></th>
-                                        <th><strong>DEPARTMAN</strong></th>
-                                        <th><strong>ROL</strong></th>
+                                        <th><strong>AD</strong></th>
+                                        <th><strong>AÇIKLAMA</strong></th>
+                                        <th><strong>KULLANICI SAYISI</strong></th>
                                         <th><strong>İŞLEMLER</strong></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($departments as $department)
                                         <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->department ? $user->department->name : '-' }}</td>
-                                            <td>
-                                                @if ($user->is_admin)
-                                                    <span class="badge badge-success">Admin</span>
-                                                @else
-                                                    <span class="badge badge-secondary">Kullanıcı</span>
-                                                @endif
-                                            </td>
+                                            <td>{{ $department->name }}</td>
+                                            <td>{{ Str::limit($department->description, 50) }}</td>
+                                            <td><span class="badge badge-info">{{ $department->users_count }}</span></td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary shadow btn-xs sharp me-1">
+                                                    <a href="{{ route('admin.departments.edit', $department) }}" class="btn btn-primary shadow btn-xs sharp me-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline" onsubmit="return confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?');">
+                                                    <form action="{{ route('admin.departments.destroy', $department) }}" method="POST" class="d-inline" onsubmit="return confirm('Bu departmanı silmek istediğinize emin misiniz?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger shadow btn-xs sharp">
@@ -75,9 +67,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="mt-3">
-                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>

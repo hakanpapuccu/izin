@@ -27,6 +27,7 @@ class User extends Authenticatable
         'zip',
         'profile_image',
         'banner_image',
+        'department_id',
     ];
 
     /**
@@ -61,5 +62,9 @@ class User extends Authenticatable
     public function receivedMessages()
     {
         return $this->hasMany(Message::class, 'receiver_id');
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

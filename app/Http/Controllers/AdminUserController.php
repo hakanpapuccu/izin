@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -23,7 +24,8 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $departments = Department::all();
+        return view('admin.users.create', compact('departments'));
     }
 
     /**
@@ -35,6 +37,7 @@ class AdminUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'department_id' => ['nullable', 'exists:departments,id'],
         ]);
 
         User::create([
@@ -42,6 +45,7 @@ class AdminUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'is_admin' => $request->has('is_admin'),
+            'department_id' => $request->department_id,
         ]);
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
@@ -52,7 +56,8 @@ class AdminUserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $departments = Department::all();
+        return view('admin.users.edit', compact('user', 'departments'));
     }
 
     /**
@@ -60,15 +65,19 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        \Illuminate\Support\Facades\Log::info('User update request:', $request->all());
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
             'is_admin' => ['boolean'],
+            'department_id' => ['nullable', 'exists:departments,id'],
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->is_admin = $request->has('is_admin');
+        $user->department_id = $request->department_id;
 
         if ($request->filled('password')) {
             $request->validate([
@@ -77,6 +86,7 @@ class AdminUserController extends Controller
             $user->password = Hash::make($request->password);
         }
 
+        \Illuminate\Support\Facades\Log::info('User before save:', $user->toArray());
         $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
