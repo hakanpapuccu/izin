@@ -6,124 +6,83 @@
 <div class="content-body">
     <div class="container-fluid">
         
-        <!-- Row 1: Statistics -->
+        <!-- Row 1: Key Metrics -->
         <div class="row">
-            <!-- Vacation Stats -->
-            <div class="col-xl-12">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="widget-stat card bg-primary">
-                            <div class="card-body  p-4">
-                                <div class="media">
-                                    <span class="me-3">
-                                        <i class="fas fa-plane-departure"></i>
-                                    </span>
-                                    <div class="media-body text-white text-end">
-                                        <p class="mb-1">Toplam İzin</p>
-                                        <h3 class="text-white">{{ $totalVacationsCount }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="widget-stat card bg-warning">
-                            <div class="card-body p-4">
-                                <div class="media">
-                                    <span class="me-3">
-                                        <i class="fas fa-hourglass-half"></i>
-                                    </span>
-                                    <div class="media-body text-white text-end">
-                                        <p class="mb-1">Onay Bekleyen</p>
-                                        <h3 class="text-white">{{ $pendingVacationsCount }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="widget-stat card bg-success">
-                            <div class="card-body p-4">
-                                <div class="media">
-                                    <span class="me-3">
-                                        <i class="fas fa-check-circle"></i>
-                                    </span>
-                                    <div class="media-body text-white text-end">
-                                        <p class="mb-1">Onaylanan</p>
-                                        <h3 class="text-white">{{ $approvedVacationsCount }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-sm-6">
-                        <div class="widget-stat card bg-danger">
-                            <div class="card-body p-4">
-                                <div class="media">
-                                    <span class="me-3">
-                                        <i class="fas fa-times-circle"></i>
-                                    </span>
-                                    <div class="media-body text-white text-end">
-                                        <p class="mb-1">Reddedilen</p>
-                                        <h3 class="text-white">{{ $rejectedVacationsCount }}</h3>
-                                    </div>
-                                </div>
+            <!-- Pending Vacations / Tasks -->
+            <div class="col-xl-3 col-lg-3 col-sm-6">
+                <div class="widget-stat card bg-warning">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="fas fa-hourglass-half"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                @if(Auth::user()->is_admin)
+                                <p class="mb-1">Onay Bekleyen</p>
+                                <h3 class="text-white">{{ $pendingVacationsCount }}</h3>
+                                @else
+                                <p class="mb-1">Bekleyen Görevler</p>
+                                <h3 class="text-white">{{ $pendingTasksCount }}</h3>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Task Stats -->
-            <div class="col-xl-12 col-xxl-12">
-                <div class="card">
-                    <div class="card-header border-0 pb-0">
-                        <h4 class="fs-20 font-w700 mb-0">Görev Durumu</h4>
-                    </div>
-                    <div class="card-body pb-0">
-                        <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <div class="d-flex">
-                                <div class="ms-3">
-                                    <h4 class="fs-24 font-w700 ">{{ $totalTasksCount }}</h4>
-                                    <span class="fs-16 font-w400 d-block">Toplam Görev</span>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="d-flex me-5">
-                                    <div class="mt-2">
-                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="6.5" cy="6.5" r="6.5" fill="#FFCF6D"/>
-                                        </svg>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h4 class="fs-24 font-w700 ">{{ $inProgressTasksCount }}</h4>
-                                        <span class="fs-16 font-w400 d-block">Devam Eden</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="mt-2">
-                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="6.5" cy="6.5" r="6.5" fill="#09BD3C"/>
-                                        </svg>
-                                    </div>
-                                    <div class="ms-3">
-                                        <h4 class="fs-24 font-w700 ">{{ $completedTasksCount }}</h4>
-                                        <span class="fs-16 font-w400 d-block">Tamamlanan</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress default-progress mt-4 mb-4">
-                            @php
-                                $percent = $totalTasksCount > 0 ? ($completedTasksCount / $totalTasksCount) * 100 : 0;
-                            @endphp
-                            <div class="progress-bar bg-gradient1 progress-animated" style="width: {{ $percent }}%; height:10px;" role="progressbar">
-                                <span class="sr-only">{{ number_format($percent, 0) }}% Complete</span>
+            <!-- Active Polls -->
+            <div class="col-xl-3 col-lg-3 col-sm-6">
+                <div class="widget-stat card bg-info">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="fas fa-poll"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">Aktif Anketler</p>
+                                <h3 class="text-white">{{ $activePollsCount }}</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Unread Messages -->
+            <div class="col-xl-3 col-lg-3 col-sm-6">
+                <div class="widget-stat card bg-primary">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">Okunmamış Mesaj</p>
+                                <h3 class="text-white">{{ $unreadMessagesCount }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements -->
+            <div class="col-xl-3 col-lg-3 col-sm-6">
+                <div class="widget-stat card bg-secondary">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="fas fa-bullhorn"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">Toplam Duyuru</p>
+                                <h3 class="text-white">{{ $announcementsCount }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         </div>
 
         <!-- Row 2: Pending Approvals (Admin Only) -->
@@ -177,8 +136,42 @@
         </div>
         @endif
 
-        <!-- Row 3: Recent Lists -->
+        <!-- Row 4: Latest Announcements & Recent Vacations -->
         <div class="row">
+            <!-- Latest Announcements -->
+            <div class="col-xl-6 col-lg-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div>
+                            <h4 class="fs-20 font-w700">Son Duyurular</h4>
+                        </div>
+                        <div>
+                            <a href="{{ route('announcements.index') }}" class="btn btn-outline-primary btn-rounded fs-18">Tümünü Gör</a>
+                        </div>
+                    </div>
+                    <div class="card-body px-0">
+                        @forelse($latestAnnouncements as $announcement)
+                        <div class="d-flex justify-content-between recent-emails mb-4 border-bottom pb-3 px-3">
+                            <div class="d-flex">
+                                <div class="profile-k">
+                                    <span class="bg-info text-white"><i class="fas fa-bullhorn"></i></span>
+                                </div>
+                                <div class="ms-3">
+                                    <h4 class="fs-18 font-w500">{{ $announcement->title }}</h4>
+                                    <span class="font-w400 d-block text-muted">{{ Str::limit(strip_tags($announcement->content), 80) }}</span>
+                                    <small class="text-muted">{{ $announcement->created_at->diffForHumans() }}</small>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="text-center p-4">
+                            <p class="text-muted">Henüz duyuru yok.</p>
+                        </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+
             <!-- Recent Vacations -->
             <div class="col-xl-6 col-lg-12">
                 <div class="card">
@@ -194,7 +187,7 @@
                     </div>
                     <div class="card-body px-0">
                         @foreach($vacations as $vacation)
-                        <div class="d-flex justify-content-between recent-emails mb-4 border-bottom pb-3">
+                        <div class="d-flex justify-content-between recent-emails mb-4 border-bottom pb-3 px-3">
                             <div class="d-flex">
                                 <div class="profile-k">
                                     <span class="bg-primary">{{ substr($vacation->user->name ?? 'U', 0, 1) }}</span>
@@ -216,7 +209,10 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Row 5: Recent Tasks & General Chat -->
+        <div class="row">
             <!-- Recent Tasks -->
             <div class="col-xl-6 col-lg-12">
                 <div class="card">
@@ -232,7 +228,7 @@
                     </div>
                     <div class="card-body px-0">
                         @foreach($tasks as $task)
-                        <div class="msg-bx d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                        <div class="msg-bx d-flex justify-content-between align-items-center mb-4 border-bottom pb-3 px-3">
                             <div class="msg d-flex align-items-center w-100">
                                 <div class="image-box active">
                                     <span class="btn-icon-start text-primary"><i class="fas fa-tasks fa-2x"></i></span>
@@ -251,21 +247,6 @@
                             </div>
                         </div>
                         @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row 4: Calendar and Chat Widget -->
-        <div class="row">
-            <!-- Calendar -->
-            <div class="col-xl-6">
-                <div class="card">
-                    <div class="card-header border-0">
-                        <h4 class="fs-20 font-w700">İş Takvimi</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id='dashboard-calendar'></div>
                     </div>
                 </div>
             </div>
@@ -288,6 +269,20 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 6: Calendar -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h4 class="fs-20 font-w700">İş Takvimi</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id='dashboard-calendar'></div>
                     </div>
                 </div>
             </div>

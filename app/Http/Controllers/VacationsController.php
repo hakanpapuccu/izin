@@ -8,11 +8,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vacation;
 use App\Models\User;
+use App\Models\Announcement;
+use App\Models\Poll;
+use App\Models\FileShare;
+use App\Models\Message;
 use App\Models\Task;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\VacationCreated;
 use App\Notifications\VacationStatusUpdated;
-
 
 class VacationsController extends Controller
 {
@@ -31,15 +34,9 @@ class VacationsController extends Controller
         if ($user->is_admin) {
             $vacations = Vacation::latest()->take(5)->get();
             $pendingVacationsCount = Vacation::where('is_verified', 2)->count();
-            $approvedVacationsCount = Vacation::where('is_verified', 1)->count();
-            $rejectedVacationsCount = Vacation::where('is_verified', 0)->count();
-            $totalVacationsCount = Vacation::count();
         } else {
-            $vacations = Vacation::where('vacation_user_id', $user->id)->latest()->take(5)->get(); // Changed user_id to vacation_user_id
-            $pendingVacationsCount = Vacation::where('vacation_user_id', $user->id)->where('is_verified', 2)->count(); // Changed user_id to vacation_user_id
-            $approvedVacationsCount = Vacation::where('vacation_user_id', $user->id)->where('is_verified', 1)->count(); // Changed user_id to vacation_user_id
-            $rejectedVacationsCount = Vacation::where('vacation_user_id', $user->id)->where('is_verified', 0)->count(); // Changed user_id to vacation_user_id
-            $totalVacationsCount = Vacation::where('vacation_user_id', $user->id)->count(); // Changed user_id to vacation_user_id
+            $vacations = Vacation::where('vacation_user_id', $user->id)->latest()->take(5)->get(); 
+            $pendingVacationsCount = Vacation::where('vacation_user_id', $user->id)->where('is_verified', 2)->count(); 
         }
 
         // Task Stats
@@ -65,6 +62,13 @@ class VacationsController extends Controller
             })->count();
         }
 
+        // Other Stats
+        $latestAnnouncements = Announcement::latest()->take(3)->get();
+        $activePollsCount = Poll::where('end_date', '>=', now())->count();
+        
+        $unreadMessagesCount = Message::where('receiver_id', $user->id)->where('is_read', false)->count();
+        $announcementsCount = Announcement::count();
+
         $pendingVacations = Vacation::where('is_verified', 2)->orderBy('created_at', 'desc')->get();
 
         return view('dashboard.content', compact(
@@ -72,13 +76,14 @@ class VacationsController extends Controller
             'pendingVacations',
             'tasks',
             'pendingVacationsCount',
-            'approvedVacationsCount',
-            'rejectedVacationsCount',
-            'totalVacationsCount',
             'pendingTasksCount',
             'inProgressTasksCount',
             'completedTasksCount',
-            'totalTasksCount'
+            'totalTasksCount',
+            'latestAnnouncements',
+            'activePollsCount',
+            'unreadMessagesCount',
+            'announcementsCount'
         ));
     }
 
