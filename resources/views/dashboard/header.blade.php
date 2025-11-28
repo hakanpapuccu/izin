@@ -64,7 +64,7 @@
 				<img src="{{ $site_logo ? asset('storage/' . $site_logo) : asset('images/logo.png') }}" alt="logo" width="75"> 
 				<div class="brand-title">
 					<h3 class="">{{ $site_title }}</h3>
-					<span class="brand-sub-title">Kullanıcı</span>
+					<span class="brand-sub-title">{{ auth()->user()->is_admin ? 'Yönetici' : 'Personel' }}</span>
 				</div>
             </a>
             <div class="nav-control">
@@ -451,12 +451,7 @@
 							
                         </div>
                         <ul class="navbar-nav header-right">
-							<li class="nav-item d-flex align-items-center">
-								<div class="input-group search-area">
-									<input type="text" class="form-control" placeholder="Ara...">
-									<span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
-								</div>
-							</li>
+
 								
 							<li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
@@ -515,6 +510,16 @@
 									<img src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : asset('images/user.png') }}" width="56" alt=""/>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
+                                    <div class="header-profile-info p-3 border-bottom mb-2">
+                                        <div class="d-flex align-items-center">
+                                             <img src="{{ auth()->user()->profile_image ? asset('storage/' . auth()->user()->profile_image) : asset('images/user.png') }}" width="50" height="50" class="rounded-circle me-3" alt=""/>
+                                             <div>
+                                                 <h6 class="mb-0">{{ auth()->user()->name }}</h6>
+                                                 <span class="fs-12 text-muted d-block">{{ auth()->user()->email }}</span>
+                                                 <div class="fs-12 text-primary font-w600">{{ auth()->user()->department->name ?? 'Departman Yok' }}</div>
+                                             </div>
+                                        </div>
+                                    </div>
 									<a href="{{ route('profile.edit') }}" class="dropdown-item ai-icon">
 										<svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
 										<span class="ms-2">Profil </span>
