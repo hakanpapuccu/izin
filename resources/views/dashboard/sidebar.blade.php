@@ -42,6 +42,12 @@
                     </a>
                 </li>
 
+                <li><a class="" href="{{route('polls.index')}}" aria-expanded="false">
+                        <i class="fas fa-poll"></i>
+                        <span class="nav-text">Anketler</span>
+                    </a>
+                </li>
+
                 @if(Auth::user()->is_admin)
                 <li><a class="" href="{{route('admin.users.index')}}" aria-expanded="false">
                         <i class="fas fa-users"></i>
@@ -51,6 +57,11 @@
                 <li><a class="" href="{{route('admin.departments.index')}}" aria-expanded="false">
                         <i class="fas fa-building"></i>
                         <span class="nav-text">Departmanlar</span>
+                    </a>
+                </li>
+                <li><a class="" href="{{route('admin.polls.index')}}" aria-expanded="false">
+                        <i class="fas fa-poll-h"></i>
+                        <span class="nav-text">Anket Yönetimi</span>
                     </a>
                 </li>
                 @endif

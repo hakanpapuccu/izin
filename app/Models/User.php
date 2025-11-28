@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function pollResponses()
+    {
+        return $this->hasMany(PollResponse::class);
+    }
 }

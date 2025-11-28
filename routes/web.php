@@ -15,10 +15,15 @@ Route::get('/',  [VacationsController::class, 'show'])->middleware(['auth', 'ver
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', AdminUserController::class);
     Route::resource('departments', App\Http\Controllers\DepartmentController::class);
+    Route::resource('polls', App\Http\Controllers\PollController::class);
 });
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/polls', [App\Http\Controllers\PollResponseController::class, 'index'])->name('polls.index');
+    Route::get('/polls/{poll}', [App\Http\Controllers\PollResponseController::class, 'show'])->name('polls.show');
+    Route::post('/polls/{poll}', [App\Http\Controllers\PollResponseController::class, 'store'])->name('polls.store');
+    
     Route::get('/profile/{user?}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/upload-image', [ProfileController::class, 'uploadImage'])->name('profile.upload-image');
