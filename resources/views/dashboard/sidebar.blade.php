@@ -48,6 +48,12 @@
                     </a>
                 </li>
 
+                <li><a class="" href="{{route('calendar.index')}}" aria-expanded="false">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span class="nav-text">İş Takvimi</span>
+                    </a>
+                </li>
+
                 @if(Auth::user()->is_admin)
                 <li><a class="" href="{{route('admin.users.index')}}" aria-expanded="false">
                         <i class="fas fa-users"></i>

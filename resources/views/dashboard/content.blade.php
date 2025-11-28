@@ -254,6 +254,41 @@
             </div>
         </div>
 
+        <!-- Row 4: Calendar Widget -->
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <h4 class="fs-20 font-w700">İş Takvimi</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id='dashboard-calendar'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @push('scripts')
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('dashboard-calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    locale: 'tr',
+                    headerToolbar: {
+                        left: 'prev,next',
+                        center: 'title',
+                        right: ''
+                    },
+                    height: 500,
+                    events: '{{ route("calendar.events") }}'
+                });
+                calendar.render();
+            });
+        </script>
+        @endpush
+
     </div>
 </div>
 @endsection

@@ -3,6 +3,7 @@
 <head>
 	<base href="izin//public/">
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />

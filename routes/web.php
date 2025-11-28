@@ -44,6 +44,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/files/create', [FileShareController::class, 'create'])->name('files.create');
     Route::post('/files', [FileShareController::class, 'store'])->name('files.store');
     Route::get('/files/{id}/download', [FileShareController::class, 'download'])->name('files.download');
+
+    // Business Calendar Routes
+    Route::get('/calendar', [App\Http\Controllers\BusinessEventController::class, 'index'])->name('calendar.index');
+    Route::get('/calendar/events', [App\Http\Controllers\BusinessEventController::class, 'getEvents'])->name('calendar.events');
+    
+    Route::middleware('admin')->group(function () {
+        Route::post('/calendar/events', [App\Http\Controllers\BusinessEventController::class, 'store'])->name('calendar.store');
+        Route::put('/calendar/events/{event}', [App\Http\Controllers\BusinessEventController::class, 'update'])->name('calendar.update');
+        Route::delete('/calendar/events/{event}', [App\Http\Controllers\BusinessEventController::class, 'destroy'])->name('calendar.destroy');
+    });
 });
 
 Route::controller(UserController::class)->group(function() {

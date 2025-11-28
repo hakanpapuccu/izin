@@ -20,6 +20,9 @@
                             {{ __('Users') }}
                         </x-nav-link>
                     @endif
+                    <x-nav-link :href="route('calendar.index')" :active="request()->routeIs('calendar.*')">
+                        {{ __('İş Takvimi') }}
+                    </x-nav-link>
                 </div>
             </div>
 
